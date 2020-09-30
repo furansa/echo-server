@@ -8,6 +8,7 @@ namespace Ui { class MainView; }
 QT_END_NAMESPACE
 
 class QTcpServer;
+class QTcpSocket;
 
 class MainView : public QMainWindow
 {
@@ -24,7 +25,10 @@ private slots:
 private:
     Ui::MainView *ui;
     QTcpServer *tcpServer;
+    QTcpSocket *tcpSocket;
+    void ExchangeData();
     bool StartServer();
     void StopServer();
+    void ReadData();
 };
 #endif // MAINVIEW_H
