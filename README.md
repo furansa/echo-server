@@ -12,7 +12,7 @@ port:
 $ ./EchoServer
 ```
 
-To test, just open a ```telnet``` session to the **port 7777** and type some
+To test, just open a **telnet** session to the **port 7777** and type some
 message:
 
 ```shell
