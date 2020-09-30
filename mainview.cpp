@@ -55,7 +55,7 @@ void MainView::ReadData() {
     }
 
     tcpSocket->write(qPrintable(message));
-    tcpSocket->write("\n</echo>\n");
+    tcpSocket->write("</echo>\n");
 }
 
 bool MainView::StartServer() {
