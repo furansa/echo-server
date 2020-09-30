@@ -24,7 +24,7 @@ private slots:
 private:
     Ui::MainView *ui;
     QTcpServer *tcpServer;
-    void StartServer();
+    bool StartServer();
     void StopServer();
 };
 #endif // MAINVIEW_H
