@@ -3,6 +3,11 @@ Simple Qt based TCP echo server to test network applications.
 
 This is currently a **work in progress**.
 
+# Compiling
+```shell
+$ protoc -I=./ --cpp_out=./ ./message.proto
+```
+
 # Running
 After successfully build the application from Qt Creator, it will be possible
 to run from the command line as regular user, since that will use an unprivileged
@@ -27,3 +32,4 @@ Testing the echo server
 ```
 
 The message then must be echoed back.
+

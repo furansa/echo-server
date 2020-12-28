@@ -4,8 +4,8 @@
 #include "mainview.h"
 #include "ui_mainview.h"
 
-static int PORT_NUMBER = 7777;
-static int WAIT_FOR_DATA_MS = 200;
+const static int PORT_NUMBER = 7777;
+const static int WAIT_FOR_DATA_MS = 200;
 
 MainView::MainView(QWidget *parent):QMainWindow(parent), ui(new Ui::MainView),
     tcpServer(new QTcpServer(this)), tcpSocket(nullptr) {
@@ -22,7 +22,7 @@ MainView::~MainView() {
 }
 
 void MainView::on_buttonStartServer_clicked() {
-    if (StartServer()) {
+    if(StartServer()) {
         ui->buttonStartServer->setEnabled(false);
         ui->buttonStopServer->setEnabled(true);
     }
@@ -38,7 +38,7 @@ void MainView::ExchangeData() {
     // Ask the server for next pending connection socket
     tcpSocket = tcpServer->nextPendingConnection();
 
-    if (tcpSocket->isOpen()) {
+    if(tcpSocket->isOpen()) {
         // Connect the readyRead signal from the socket to the ReadData slot
         connect(tcpSocket, &QTcpSocket::readyRead, this, &MainView::ReadData);
     }
@@ -49,7 +49,7 @@ void MainView::ReadData() {
 
     tcpSocket->write("<echo>\n");
 
-    while (!tcpSocket->atEnd()) {
+    while(!tcpSocket->atEnd()) {
         message.append(tcpSocket->readAll());
         tcpSocket->waitForReadyRead(WAIT_FOR_DATA_MS);
     }
@@ -59,9 +59,9 @@ void MainView::ReadData() {
 }
 
 bool MainView::StartServer() {
-    bool hasStarted = tcpServer->listen(QHostAddress::Any, PORT_NUMBER);
+    const bool hasStarted = tcpServer->listen(QHostAddress::Any, PORT_NUMBER);
 
-    if (!hasStarted) {
+    if(!hasStarted) {
         QMessageBox::critical(this, "Echo Server",
                               tr("Unable to start the server: %1").arg(tcpServer->errorString()));
 
@@ -73,5 +73,5 @@ bool MainView::StartServer() {
 
 void MainView::StopServer() {
     tcpServer->close();
-    if ((tcpSocket != nullptr) && (tcpSocket->isOpen())) tcpSocket->close();
+    if((tcpSocket != nullptr) && (tcpSocket->isOpen())) tcpSocket->close();
 }
